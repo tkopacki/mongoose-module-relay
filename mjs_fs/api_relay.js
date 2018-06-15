@@ -4,14 +4,14 @@ load('api_gpio.js');
 load('api_rpc.js');
 
 let relay = {
-    init(pin) {
+    init: function (pin) {
         GPIO.set_mode(pin, GPIO.MODE_OUTPUT);
     },
-    on(pin) {
+    on: function (pin) {
         GPIO.write(pin, Cfg.get('relay.config.stateOn'));
         print('Channel', name, 'switched to ON');
     },
-    off(pin) {
+    off: function (pin) {
         GPIO.write(pin, Cfg.get('relay.config.stateOff'));
         print('Channel', name, 'switched to OFF');
     }
