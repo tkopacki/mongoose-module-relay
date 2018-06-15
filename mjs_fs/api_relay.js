@@ -20,7 +20,7 @@ let relay = {
 let module = {
     id: Cfg.get('module.id'),
     name: Cfg.get('module.name'),
-    items: []
+    items: {}
 };
 
 function init() {
@@ -30,6 +30,7 @@ function init() {
     for (let idx = 0; idx < enabledChannelsArray.length; idx++) {
         print('Initializing channel', enabledChannelsArray[idx]);
         module.items[enabledChannelsArray[idx]].id = enabledChannelsArray[idx];
+        print('dupa !');
         let name = enabledChannelsArray[idx];
         print(name);
         name = 'relay.' + name;
