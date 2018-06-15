@@ -21,13 +21,6 @@ let module = {
     id: Cfg.get('module.id'),
     name: Cfg.get('module.name'),
     items: [],
-    find: function(id) {
-        for(let idx ; idx < this.items.length ; idx++) {
-            if(this.items[idx].id === id) {
-                return this.items[idx];
-            }
-        }
-    }
 };
 
 function init() {
@@ -43,7 +36,7 @@ function init() {
             type: 'switch',
             state: 0
         }
-        module.items.push(item);
+        module.items[item.id] = item;
         relay.off(item.pin);
     }
     print('All channels initialized');
@@ -55,14 +48,14 @@ function registerRPCs() {
     });
 
     RPC.addHandler('Module.itemState', function (args) {
-        let item = module.find(args.id);
+        let item = module.items[args.id];
         return {
             state: item.state
         };
     });
 
     RPC.addHandler('Module.turnOn', function (args) {
-        let item = module.find(args.id);
+        let item = module.items[args.id];
         relay.on(item.pin);
         item.state = 1;
         return {
@@ -71,7 +64,7 @@ function registerRPCs() {
     });
 
     RPC.addHandler('Module.turnOff', function (args) {
-        let item = module.find(args.id);
+        let item = module.items[args.id];
         relay.off(item.pin);
         item.state = 0;
         return {
