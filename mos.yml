@@ -1,0 +1,41 @@
+author: Tomasz Kopacki <tomasz@kopacki.eu>
+description: Module for AC/DC relay
+version: 1.0
+
+libs_version: ${mos.version}
+modules_version: ${mos.version}
+mongoose_os_version: ${mos.version}
+
+filesystem:
+  - mjs_fs
+  - public
+
+config_schema:
+  - ["module", "o", {title: "Module configuration section"}]
+  - ["module.id", "s", {title: "Module id"}]
+  - ["module.name", "s", {title: "Module name"}]
+  - ["relay", "o", {title: "Relay controller settings"}]
+  - ["relay.channels", "o", {title: "Relay configured channels"}]
+  - ["relay.channels.channel1", "o", {title: "First channel settings"}]
+  - ["relay.channels.channel1.name", "s", "Channel 1 name", {title: "First channel name"}]
+  - ["relay.channels.channel1.pin", "i", 1, {title: "Pin for the first channel"}]
+  - ["relay.channels.channel2", "o", {title: "Second channel settings"}]
+  - ["relay.channels.channel2.name", "s", "Channel 2 name", {title: "Second channel name"}]
+  - ["relay.channels.channel2.pin", "i", 2, {title: "Pin for the second channel"}]
+  - ["relay.channels.channel3", "o", {title: "Third channel settings"}]
+  - ["relay.channels.channel3.name", "s", "Channel 3 name", {title: "Third channel name"}]
+  - ["relay.channels.channel3.pin", "i", 3, {title: "Pin for the third channel"}]
+  - ["relay.channels.channel4", "o", {title: "Forth channel settings"}]
+  - ["relay.channels.channel4.name", "s", "Channel 4 name", {title: "Forth channel name"}]
+  - ["relay.channels.channel4.pin", "i", 4, {title: "Pin for the forth channel"}]
+  - ["relay.channels.enabled", "s", "channel1, channel2, channel3, channel4", {title: "Coma spearted list of enabled channels"}]
+  - ["relay.config", "o", {title: "Common settings"}]
+  - ["relay.config.stateOn", "d", 0, {title: "Pin state for ON signal"}]
+  - ["relay.config.stateOff", "d", 1, {title: "Pin state for OFF signal"}]
+
+libs:
+  - origin: https://github.com/mongoose-os-libs/mjs
+  - origin: https://github.com/mongoose-os-libs/http-server
+  - origin: https://github.com/tkopacki/mongoose-string-utils
+
+manifest_version: 2017-05-18
