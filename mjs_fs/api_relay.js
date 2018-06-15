@@ -9,11 +9,11 @@ let relay = {
     },
     on: function (pin) {
         GPIO.write(pin, Cfg.get('relay.config.stateOn'));
-        print('Channel', name, 'switched to ON');
+        print('Channel', pin, 'switched to ON');
     },
     off: function (pin) {
         GPIO.write(pin, Cfg.get('relay.config.stateOff'));
-        print('Channel', name, 'switched to OFF');
+        print('Channel', pin, 'switched to OFF');
     }
 };
 
@@ -36,8 +36,7 @@ function init() {
             type: 'switch',
             state: 0
         };
-        print(item);
-        module.items[idx] = item;
+        module.items[enabledChannelsArray[idx]] = item;
         relay.off(item.pin);
     }
     print('All channels initialized');
