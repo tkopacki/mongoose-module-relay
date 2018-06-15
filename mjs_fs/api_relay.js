@@ -23,7 +23,7 @@ let module = {
     items: {}
 }
 
-(function init() {
+function init() {
     let enabledChannels = Cfg.get('relay.channels.enabled');
     let enabledChannelsArray = StringUtils.split(enabledChannels, ',');
     print('Enabled channels:', enabledChannelsArray.length);
@@ -36,9 +36,9 @@ let module = {
         relay.off(module.items[enabledChannelsArray[idx]].pin);
     }
     print('All channels initialized');
-})();
+};
 
-(function registerRPCs() {
+function registerRPCs() {
     RPC.addHandler('Module.describe', function (args) {
         return module;
     });
@@ -64,4 +64,7 @@ let module = {
             result: '200'
         };
     });
-})();
+};
+
+init();
+registerRPCs();
