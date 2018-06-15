@@ -51,7 +51,7 @@ let module = {
 
     RPC.addHandler('Module.turnOn', function (args) {
         relay.on(module.items[args.id].pin);
-        state: module.items[args.id].state = 1;
+        module.items[args.id].state = 1;
         return {
             result: '200'
         };
@@ -59,7 +59,7 @@ let module = {
 
     RPC.addHandler('Module.turnOff', function (args) {
         relay.off(module.items[args.id].pin);
-        state: module.items[args.id].state = 0;
+        module.items[args.id].state = 0;
         return {
             result: '200'
         };
