@@ -20,7 +20,7 @@ let relay = {
 let module = {
     id: Cfg.get('module.id'),
     name: Cfg.get('module.name'),
-    items: [],
+    items: []
 };
 
 function init() {
@@ -44,6 +44,9 @@ function init() {
 
 function registerRPCs() {
     RPC.addHandler('Module.describe', function (args) {
+        print(module.items);
+        print(module.items.length);
+        print(module.items.light1);
         return module;
     });
 
