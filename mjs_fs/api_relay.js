@@ -29,7 +29,7 @@ function init() {
     print('Enabled channels:', enabledChannelsArray.length);
     for (let idx = 0; idx < enabledChannelsArray.length; idx++) {
         print('Initializing channel', enabledChannelsArray[idx]);
-        module.items[enabledChannelsArray[idx]].id = Cfg.get(enabledChannelsArray[idx]);
+        module.items[enabledChannelsArray[idx]].id = enabledChannelsArray[idx];
         let name = 'relay.channels.' + enabledChannelsArray[idx] + '.name';
         print(name);
         module.items[enabledChannelsArray[idx]].name = Cfg.get('relay.channels.' + enabledChannelsArray[idx] + '.name');
