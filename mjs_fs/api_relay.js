@@ -20,7 +20,14 @@ let relay = {
 let module = {
     id: Cfg.get('module.id'),
     name: Cfg.get('module.name'),
-    items: {}
+    items: [],
+    find: function(id) {
+        for(let idx ; idx < this.items.length ; idx++) {
+            if(this.items[idx].id === id) {
+                return this.items[idx];
+            }
+        }
+    }
 };
 
 function init() {
@@ -29,17 +36,15 @@ function init() {
     print('Enabled channels:', enabledChannelsArray.length);
     for (let idx = 0; idx < enabledChannelsArray.length; idx++) {
         print('Initializing channel', enabledChannelsArray[idx]);
-        module.items[enabledChannelsArray[idx]].id = enabledChannelsArray[idx];
-        print('dupa !');
-        let name = enabledChannelsArray[idx];
-        print(name);
-        name = 'relay.' + name;
-        print(name);
-        module.items[enabledChannelsArray[idx]].name = Cfg.get('relay.channels.' + enabledChannelsArray[idx] + '.name');
-        module.items[enabledChannelsArray[idx]].pin = Cfg.get('relay.channels.' + enabledChannelsArray[idx] + '.pin');
-        module.items[enabledChannelsArray[idx]].type = 'switch';
-        module.items[enabledChannelsArray[idx]].state = 0;
-        relay.off(module.items[enabledChannelsArray[idx]].pin);
+        let item = {
+            id: enabledChannelsArray[idx],
+            name: Cfg.get('relay.channels.' + enabledChannelsArray[idx] + '.name'),
+            pin: Cfg.get('relay.channels.' + enabledChannelsArray[idx] + '.pin'),
+            type: 'switch',
+            state: 0
+        }
+        module.items.push(item);
+        relay.off(item.pin);
     }
     print('All channels initialized');
 }
@@ -50,22 +55,25 @@ function registerRPCs() {
     });
 
     RPC.addHandler('Module.itemState', function (args) {
+        let item = module.find(args.id);
         return {
-            state: module.items[args.id].state
+            state: item.state
         };
     });
 
     RPC.addHandler('Module.turnOn', function (args) {
-        relay.on(module.items[args.id].pin);
-        module.items[args.id].state = 1;
+        let item = module.find(args.id);
+        relay.on(item.pin);
+        item.state = 1;
         return {
             result: '200'
         };
     });
 
     RPC.addHandler('Module.turnOff', function (args) {
-        relay.off(module.items[args.id].pin);
-        module.items[args.id].state = 0;
+        let item = module.find(args.id);
+        relay.off(item.pin);
+        item.state = 0;
         return {
             result: '200'
         };
