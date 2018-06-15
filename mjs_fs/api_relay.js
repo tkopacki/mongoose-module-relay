@@ -36,7 +36,8 @@ function init() {
             type: 'switch',
             state: 0
         }
-        module.items[item.id] = item;
+        print(item);
+        module.items[idx] = item;
         relay.off(item.pin);
     }
     print('All channels initialized');
