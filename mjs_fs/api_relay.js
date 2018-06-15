@@ -35,7 +35,7 @@ function init() {
             pin: Cfg.get('relay.channels.' + enabledChannelsArray[idx] + '.pin'),
             type: 'switch',
             state: 0
-        }
+        };
         print(item);
         module.items[idx] = item;
         relay.off(item.pin);
