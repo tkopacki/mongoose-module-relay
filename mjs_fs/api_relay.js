@@ -30,8 +30,8 @@ function init() {
     for (let idx = 0; idx < enabledChannelsArray.length; idx++) {
         print('Initializing channel', enabledChannelsArray[idx]);
         module.items[enabledChannelsArray[idx]].id = Cfg.get(enabledChannelsArray[idx]);
-        module.items[enabledChannelsArray[idx]].name = Cfg.get(enabledChannelsArray[idx] + '.name');
-        module.items[enabledChannelsArray[idx]].pin = Cfg.get(enabledChannelsArray[idx] + '.pin');
+        module.items[enabledChannelsArray[idx]].name = Cfg.get('relay.channels.' + enabledChannelsArray[idx] + '.name');
+        module.items[enabledChannelsArray[idx]].pin = Cfg.get('relay.channels.' + enabledChannelsArray[idx] + '.pin');
         module.items[enabledChannelsArray[idx]].type = 'switch';
         module.items[enabledChannelsArray[idx]].state = 0;
         relay.off(module.items[enabledChannelsArray[idx]].pin);
