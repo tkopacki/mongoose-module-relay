@@ -20,8 +20,8 @@ let relay = {
 let module = {
     id: Cfg.get('module.id'),
     name: Cfg.get('module.name'),
-    items: {}
-}
+    items: []
+};
 
 function init() {
     let enabledChannels = Cfg.get('relay.channels.enabled');
@@ -36,7 +36,7 @@ function init() {
         relay.off(module.items[enabledChannelsArray[idx]].pin);
     }
     print('All channels initialized');
-};
+}
 
 function registerRPCs() {
     RPC.addHandler('Module.describe', function (args) {
@@ -64,7 +64,7 @@ function registerRPCs() {
             result: '200'
         };
     });
-};
+}
 
 init();
 registerRPCs();
