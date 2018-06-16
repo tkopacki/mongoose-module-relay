@@ -37,7 +37,7 @@ let module = {
         }
         return description;
     }
-}
+};
 
 function init() {
     let enabledChannels = Cfg.get('relay.channels.enabled');
