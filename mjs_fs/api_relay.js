@@ -11,20 +11,20 @@ let module = {
     items: [],
     keys: [],
     add: function (item) {
-        items[item.id] = item;
-        keys.push(item.id);
+        this.items[item.id] = item;
+        this.keys.push(item.id);
         GPIO.set_mode(item.pin, GPIO.MODE_OUTPUT);
         this.off(item.id);
     },
     on: function (id) {
-        GPIO.write(items[id].pin, Cfg.get('relay.config.stateOn'));
-        item[id].state = 1;
-        print('Channel', item[id].name, 'switched to ON');
+        GPIO.write(this.items[id].pin, Cfg.get('relay.config.stateOn'));
+        this.items[id].state = 1;
+        print('Channel', this.items[id].name, 'switched to ON');
     },
     off: function (id) {
-        GPIO.write(items[id].pin, Cfg.get('relay.config.stateOff'));
-        item[id].state = 0;
-        print('Channel', item[id].name, 'switched to OFF');
+        GPIO.write(this.items[id].pin, Cfg.get('relay.config.stateOff'));
+        this.items[id].state = 0;
+        print('Channel', this.items[id].name, 'switched to OFF');
     },
     describe: function () {
         let description = {
