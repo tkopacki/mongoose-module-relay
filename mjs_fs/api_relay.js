@@ -31,7 +31,7 @@ let module = {
             module_id: this.metadata.id,
             module_name: this.metadata.name,
             items: []
-        }
+        };
         for (let i = 0; i < this.keys.length; i++) {
             description.items.push(this.items[this.keys[i]]);
         }
