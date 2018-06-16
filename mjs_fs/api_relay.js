@@ -3,25 +3,41 @@ load('api_string.js');
 load('api_gpio.js');
 load('api_rpc.js');
 
-let relay = {
-    init: function (pin) {
-        GPIO.set_mode(pin, GPIO.MODE_OUTPUT);
-    },
-    on: function (pin) {
-        GPIO.write(pin, Cfg.get('relay.config.stateOn'));
-        print('Channel', pin, 'switched to ON');
-    },
-    off: function (pin) {
-        GPIO.write(pin, Cfg.get('relay.config.stateOff'));
-        print('Channel', pin, 'switched to OFF');
-    }
-};
-
 let module = {
-    id: Cfg.get('module.id'),
-    name: Cfg.get('module.name'),
-    items: []
-};
+    metadata: {
+        id: Cfg.get('module.id'),
+        name: Cfg.get('module.name')
+    },
+    items: [],
+    keys: [],
+    add: function (item) {
+        items[item.id] = item;
+        keys.push(item.id);
+        GPIO.set_mode(item.pin, GPIO.MODE_OUTPUT);
+        this.off(item.id);
+    },
+    on: function (id) {
+        GPIO.write(items[id].pin, Cfg.get('relay.config.stateOn'));
+        item[id].state = 1;
+        print('Channel', item[id].name, 'switched to ON');
+    },
+    off: function (id) {
+        GPIO.write(items[id].pin, Cfg.get('relay.config.stateOff'));
+        item[id].state = 0;
+        print('Channel', item[id].name, 'switched to OFF');
+    },
+    describe: function () {
+        let description = {
+            module_id: this.metadata.id,
+            module_name: this.metadata.name,
+            items: []
+        }
+        for (const i = 0; i < this.keys.length; i++) {
+            description.items.push(this.items[this.keys[i]]);
+        }
+        return description;
+    }
+}
 
 function init() {
     let enabledChannels = Cfg.get('relay.channels.enabled');
@@ -36,40 +52,32 @@ function init() {
             type: 'switch',
             state: 0
         };
-        module.items[enabledChannelsArray[idx]] = item;
-        relay.off(item.pin);
+        module.add(item);
     }
     print('All channels initialized');
 }
 
 function registerRPCs() {
     RPC.addHandler('Module.describe', function (args) {
-        print(module.items);
-        print(module.items.length);
-        print(module.items.light1);
-        return module;
+        print(module.describe());
+        return module.describe();
     });
 
     RPC.addHandler('Module.itemState', function (args) {
-        let item = module.items[args.id];
         return {
-            state: item.state
+            state: module.items[args.id].state
         };
     });
 
     RPC.addHandler('Module.turnOn', function (args) {
-        let item = module.items[args.id];
-        relay.on(item.pin);
-        item.state = 1;
+        relay.on(args.id);
         return {
             result: '200'
         };
     });
 
     RPC.addHandler('Module.turnOff', function (args) {
-        let item = module.items[args.id];
-        relay.off(item.pin);
-        item.state = 0;
+        relay.off(args.id);
         return {
             result: '200'
         };
