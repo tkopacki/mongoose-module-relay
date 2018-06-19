@@ -70,14 +70,14 @@ function registerRPCs() {
     });
 
     RPC.addHandler('Module.turnOn', function (args) {
-        relay.on(args.id);
+        module.on(args.id);
         return {
             result: '200'
         };
     });
 
     RPC.addHandler('Module.turnOff', function (args) {
-        relay.off(args.id);
+        module.off(args.id);
         return {
             result: '200'
         };
