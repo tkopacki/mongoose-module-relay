@@ -70,20 +70,14 @@ function registerRPCs() {
     });
 
     RPC.addHandler('Module.turnOn', function (args) {
-        print(typeof args.id);
-        print(typeof args.id * 1);
-        print(typeof args.id + '')
-        module.on(args.id + '');
+        module.on(JSON.parse(args.id));
         return {
             result: '200'
         };
     });
 
     RPC.addHandler('Module.turnOff', function (args) {
-        print(typeof args.id);
-        print(typeof args.id * 1);
-        print(typeof args.id + '');
-        module.off(args.id + '');
+        module.off(JSON.parse(args.id));
         return {
             result: '200'
         };
