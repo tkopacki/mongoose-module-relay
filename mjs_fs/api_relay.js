@@ -87,7 +87,7 @@ function registerRPCs() {
 
 function startServer() {
     Net.serve({
-        addr: 'tcp://11345',
+        addr: 'udp://11345',
         onconnect: function(conn){print(conn);},
         ondata: function(conn, data){print(data);print(conn);}
     });
