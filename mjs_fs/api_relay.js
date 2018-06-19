@@ -70,6 +70,9 @@ function registerRPCs() {
     });
 
     RPC.addHandler('Module.turnOn', function (args) {
+        print(typeof args.id);
+        print(typeof args.id * 1);
+        print(typeof args.id + '')
         module.on(args.id + '');
         return {
             result: '200'
@@ -77,6 +80,9 @@ function registerRPCs() {
     });
 
     RPC.addHandler('Module.turnOff', function (args) {
+        print(typeof args.id);
+        print(typeof args.id * 1);
+        print(typeof args.id + '');
         module.off(args.id + '');
         return {
             result: '200'
