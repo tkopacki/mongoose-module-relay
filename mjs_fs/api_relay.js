@@ -72,7 +72,7 @@ function registerRPCs() {
     RPC.addHandler('Module.turnOn', function (args) {
         print(args);
         print(args.id);
-        module.on(JSON.parse(args.id));
+        module.on(args.id);
         return {
             result: '200'
         };
