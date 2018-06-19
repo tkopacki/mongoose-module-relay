@@ -2,6 +2,7 @@ load('api_config.js');
 load('api_string.js');
 load('api_gpio.js');
 load('api_rpc.js');
+load('api_net.js');
 
 let module = {
     metadata: {
@@ -84,5 +85,14 @@ function registerRPCs() {
     });
 }
 
+function startServer() {
+    Net.serve({
+        addr: 'tcp://11345',
+        onconnect: function(conn){print(conn);},
+        ondata: function(conn, data){print(data);print(conn);}
+    });
+}
+
 init();
 registerRPCs();
+startServer();
