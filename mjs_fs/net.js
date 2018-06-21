@@ -6,6 +6,7 @@ function startServer() {
     Net.serve({
         addr: 'udp://11345',
         onconnect: function (connection) {
+            print('Connection to broadcast established');
             Timer.set(5000, true, function () {
                 Net.send(connection, 'hello !');
                 print('Hello sent.');
