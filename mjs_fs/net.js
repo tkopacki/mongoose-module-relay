@@ -5,26 +5,15 @@ load('api_events.js')
 function startServer() {
     Net.serve({
         addr: 'udp://11345',
-        onconnect: function (conn) {
-            print(conn);
+        onconnect: function (connection) {
+            Timer.set(5000, true, function () {
+                Net.send(connection, 'hello !');
+                print('Hello sent.');
+            }, null);
         },
-        ondata: function (conn, data) {
+        ondata: function (connection, data) {
             print(data);
-            print(conn);
+            print(connection);
         }
     });
 }
-
-let connection = Net.connect({
-    addr: 'udp://192.168.0.255:11345'
-});
-
-Event.addGroupHandler(Net.EVENT_GRP, function (event, ed, connection) {
-    if (Net.STATUS_CONNECTED === event) {
-        print('Connection to broadcast established.');
-        Timer.set(5000, true, function () {
-            Net.send(connection, 'hello !');
-            print('Hello sent.');
-        }, null);
-    }
-}, connection);
