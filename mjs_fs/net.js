@@ -15,16 +15,14 @@ function startServer() {
     });
 }
 
-Event.addGroupHandler(Net.EVENT_GRP, function(ev, ed, ud){
-    print(ev);
-    print(ed);
-    print(ud);
-}, {foo: 'bar'});
-
 let connection = Net.connect({
     addr: 'udp://192.168.0.255:11345'
 });
-/* 
-Timer.set(5000, true, function () {
-    Net.send(connection, 'hello !');
-}, null); */
+
+Event.addGroupHandler(Net.EVENT_GRP, function (event, ed, connection) {
+    if (Net.EV_CONNECT === event) {
+        Timer.set(5000, true, function () {
+            Net.send(connection, 'hello !');
+        }, null);
+    }
+}, connection);
