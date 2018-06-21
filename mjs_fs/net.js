@@ -17,8 +17,9 @@ function startServer() {
 let connection = Net.connect({
     addr: 'udp://255.255.255.255:11345',
     onconnect: function (c) {
+        let connection = c;
         Timer.set(5000, true, function () {
-            Net.send(c, 'hello !');
+            Net.send(connection, 'hello !');
         }, null);
     }
 });
