@@ -1,5 +1,6 @@
 load('api_net.js');
 load('api_timer.js');
+load('api_events.js')
 
 function startServer() {
     Net.serve({
@@ -14,10 +15,16 @@ function startServer() {
     });
 }
 
-let connection = Net.connect({
-    addr: 'udp://255.255.255.255:11345'
+Event.addGroupHandler(Net.EVENT_GRP, function(ev, ed, ud){
+    print(ev);
+    print(ed);
+    print(ud);
 });
 
+let connection = Net.connect({
+    addr: 'udp://192.168.0.255:11345'
+});
+/* 
 Timer.set(5000, true, function () {
     Net.send(connection, 'hello !');
-}, null);
+}, null); */
