@@ -1,4 +1,5 @@
 load('api_net.js');
+load('api_timer.js');
 
 function startServer() {
     Net.serve({
@@ -12,3 +13,8 @@ function startServer() {
         }
     });
 }
+
+Timer.set(5000, true, function () {
+    let connection = connect('255.255.255.255:11345');
+    send(connection, 'hello !');
+}, null);
