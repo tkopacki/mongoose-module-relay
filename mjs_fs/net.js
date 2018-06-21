@@ -2,6 +2,11 @@ load('api_net.js');
 load('api_timer.js');
 load('api_events.js')
 
+print(Net.STATUS_DISCONNECTED);
+print(Net.STATUS_CONNECTING);
+print(Net.STATUS_CONNECTED );
+print(Net.STATUS_GOT_IP );
+
 Event.addGroupHandler(Net.EVENT_GRP, function(event, wtf, data) {
     print(event);
     print(data);
