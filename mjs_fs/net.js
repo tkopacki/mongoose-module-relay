@@ -14,7 +14,11 @@ function startServer() {
     });
 }
 
-Timer.set(5000, true, function () {
-    let connection = Net.connect('udp://192.168.0.255:11345');
-    Net.send(connection, 'hello !');
-}, null);
+let connection = Net.connect({
+    addr: 'udp://255.255.255.255:11345',
+    onconnect: function (c) {
+        Timer.set(5000, true, function () {
+            Net.send(c, 'hello !');
+        }, null);
+    }
+});
