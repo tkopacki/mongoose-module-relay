@@ -2,6 +2,11 @@ load('api_net.js');
 load('api_timer.js');
 load('api_events.js')
 
+Event.addGroupHandler(Net.EVENT_GRP, function(event, wtf, data) {
+    print(event);
+    print(data);
+});
+
 function startServer() {
     Net.serve({
         addr: 'udp://11345',
