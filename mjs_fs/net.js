@@ -20,7 +20,7 @@ let connection = Net.connect({
 });
 
 Event.addGroupHandler(Net.EVENT_GRP, function (event, ed, connection) {
-    if (Net.EV_CONNECT === event) {
+    if (Net.STATUS_CONNECTED === event) {
         print('Connection to broadcast established.');
         Timer.set(5000, true, function () {
             Net.send(connection, 'hello !');
