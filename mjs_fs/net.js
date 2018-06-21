@@ -15,6 +15,6 @@ function startServer() {
 }
 
 Timer.set(5000, true, function () {
-    let connection = connect('255.255.255.255:11345');
-    send(connection, 'hello !');
+    let connection = Net.connect('255.255.255.255:11345');
+    Net.send(connection, 'hello !');
 }, null);
