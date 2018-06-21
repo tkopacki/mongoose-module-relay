@@ -5,7 +5,7 @@ load('api_events.js')
 Event.addGroupHandler(Net.EVENT_GRP, function(event, wtf, data) {
     print(event);
     print(data);
-});
+}, {});
 
 function startServer() {
     Net.serve({
