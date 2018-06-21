@@ -19,7 +19,7 @@ Event.addGroupHandler(Net.EVENT_GRP, function(ev, ed, ud){
     print(ev);
     print(ed);
     print(ud);
-});
+}, {foo: 'bar'});
 
 let connection = Net.connect({
     addr: 'udp://192.168.0.255:11345'
