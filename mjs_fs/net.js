@@ -14,7 +14,7 @@ function startServer() {
     });
     connectionPlaceHolder.connection = connection;
 
-    Net.serve({
+/*     Net.serve({
         addr: 'udp://11345',
         onconnect: function (conn) {
             print('connect');
@@ -31,7 +31,7 @@ function startServer() {
         onerror: function (conn) {
             print('error');
         }
-    });
+    }); */
     Timer.set(1000, Timer.REPEAT, function () {
         Net.send(connectionPlaceHolder.connection, "aaa");
     }, null);
