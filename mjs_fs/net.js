@@ -33,7 +33,7 @@ function startServer() {
             addr: 'udp://192.168.0.255:11345'
         });
         Net.send(c, "eee");
-        print(bag.c, 'sent');
+        print(c, 'sent');
         Net.close(c);
     }, null);
 }
