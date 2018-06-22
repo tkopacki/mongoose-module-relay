@@ -7,26 +7,23 @@ print(Net.STATUS_CONNECTED);
 print(Net.STATUS_GOT_IP);
 
 function startServer() {
-    Event.addGroupHandler(Event.SYS, function (ev, evdata, ud) {
-        if (ev === Net.STATUS_GOT_IP) {
-            Net.serve({
-                addr: 'udp://192.168.0.255:11345',
-                onconnect: function (conn) {
-                    print('connect');
-                },
-                ondata: function (conn, data) {
-                    print('data');
-                },
-                onevent: function (conn, data, ev, edata) {
-                    print('event');
-                },
-                onclose: function (conn) {
-                    print('close');
-                },
-                onerror: function (conn) {
-                    print('error');
-                }
-            });
+    Net.serve({
+        addr: 'udp://192.168.0.255:11345',
+        onconnect: function (conn) {
+            print('connect');
+        },
+        ondata: function (conn, data) {
+            print('data');
+        },
+        onevent: function (conn, data, ev, edata) {
+            print('event');
+        },
+        onclose: function (conn) {
+            print('close');
+        },
+        onerror: function (conn) {
+            print('error');
         }
-    }, null);
+    });
+}
 }
