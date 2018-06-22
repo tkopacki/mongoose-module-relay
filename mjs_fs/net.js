@@ -27,12 +27,12 @@ function startServer() {
                 print('error');
             }
         }); */
+    let connection = Net.connect({
+        addr: 'udp://192.168.0.255:11345'
+    });
     Timer.set(5000, Timer.REPEAT, function () {
-        let connection = Net.connect({
-            addr: 'udp://192.168.0.255:11345'
-        });
         Net.send(connection, "aaa");
-        Net.close(connection);
+        print('sent');
     }, null);
 
 }
