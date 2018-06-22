@@ -9,6 +9,8 @@ print(Net.STATUS_GOT_IP);
 let connectionPlaceHolder = {};
 
 function startServer() {
+    let connection = Net.connect({addr: 'udp://192.168.0.255:11345'});
+
     Net.serve({
         addr: 'udp://11345',
         onconnect: function (conn) {
@@ -27,4 +29,6 @@ function startServer() {
             print('error');
         }
     });
+
+    Net.send(connection, "aaa");
 }
