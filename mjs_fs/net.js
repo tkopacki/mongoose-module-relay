@@ -8,7 +8,7 @@ print(Net.STATUS_GOT_IP);
 
 let bag = {};
 function startServer() {
-    Net.serve({
+/*     Net.serve({
         addr: 'udp://192.168.0.255:11345',
         onconnect: function (conn) {
             print(conn, 'connect');
@@ -25,7 +25,7 @@ function startServer() {
         onerror: function (conn) {
             print('error');
         }
-    });
+    }); */
     bag.c = Net.connect({
         addr: 'udp://192.168.0.255:11345'
     });
