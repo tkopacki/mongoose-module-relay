@@ -10,7 +10,7 @@ function startServer() {
     Event.addGroupHandler(Event.SYS, function (ev, evdata, ud) {
         if (ev === Net.STATUS_GOT_IP) {
             Net.serve({
-                addr: 'udp://255.255.255.255:11345',
+                addr: 'udp://192.168.0.255:11345',
                 onconnect: function (conn) {
                     print('connect');
                 },
