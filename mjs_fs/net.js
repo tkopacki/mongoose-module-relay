@@ -23,6 +23,7 @@ function startServer() {
                 print('info:', JSON.stringify(resp));
                 let ip = resp.wifi.sta_ip;
                 let broadcast = 'udp://' + ip[0.10] + '255' + ':11345'
+                print(broadcast === 'udp://192.168.0.255:11345');
                 print(ip);
                 print(broadcast);
                 Net.serve({
