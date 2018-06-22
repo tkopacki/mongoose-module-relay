@@ -31,5 +31,6 @@ function startServer() {
     });
     Timer.set(5000, Timer.REPEAT, function () {
         Net.send(bag.c, "eee");
+        print(bag.c, 'sent');
     }, null);
 }
