@@ -9,24 +9,24 @@ print(Net.STATUS_GOT_IP);
 let bag = {};
 
 function startServer() {
-    /*     Net.serve({
-            addr: 'udp://192.168.0.255:11345',
-            onconnect: function (conn) {
-                print(conn, 'connect');
-            },
-            ondata: function (conn, data) {
-                print(conn, data);
-            },
-            onevent: function (conn, data, ev, edata) {
-                print('event');
-            },
-            onclose: function (conn) {
-                print(conn, 'close');
-            },
-            onerror: function (conn) {
-                print('error');
-            }
-        }); */
+    Net.serve({
+        addr: 'udp://192.168.0.255:11345',
+        onconnect: function (conn) {
+            print(conn, 'connect');
+        },
+        ondata: function (conn, data) {
+            print(conn, data);
+        },
+        onevent: function (conn, data, ev, edata) {
+            print('event');
+        },
+        onclose: function (conn) {
+            print(conn, 'close');
+        },
+        onerror: function (conn) {
+            print('error');
+        }
+    });
 
     Timer.set(5000, Timer.REPEAT, function () {
         let c = Net.connect({
@@ -35,20 +35,9 @@ function startServer() {
                 print(conn, 'connect');
                 Net.send(conn, "eee");
                 print(conn, 'sent');
-            },
-            ondata: function (conn, data) {
-                print(conn, data);
-            },
-            onevent: function (conn, data, ev, edata) {
-                print('event');
-            },
-            onclose: function (conn) {
-                print(conn, 'close');
-            },
-            onerror: function (conn) {
-                print('error');
+                Net.close(conn);
             }
         });
-        Net.close(c);
+
     }, null);
 }
