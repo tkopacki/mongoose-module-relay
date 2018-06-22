@@ -6,17 +6,7 @@ print(Net.STATUS_CONNECTING);
 print(Net.STATUS_CONNECTED);
 print(Net.STATUS_GOT_IP);
 
-let connection = Net.connect({
-    addr: 'udp://192.168.0.255:11345'
-});
-
 function startServer() {
-
-    Timer.set(5000, Timer.REPEAT, function () {
-        Net.send(connection, "aaa");
-        print('sent');
-    }, null);
-
     Event.addGroupHandler(Event.SYS, function (ev, evdata, ud) {
         if (ev === Net.STATUS_GOT_IP) {
             Net.serve({
@@ -39,5 +29,4 @@ function startServer() {
             });
         }
     }, null);
-
 }
