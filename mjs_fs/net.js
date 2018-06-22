@@ -30,7 +30,22 @@ function startServer() {
 
     Timer.set(5000, Timer.REPEAT, function () {
         let c = Net.connect({
-            addr: 'udp://192.168.0.255:11345'
+            addr: 'udp://192.168.0.255:11345',
+            onconnect: function (conn) {
+                print(conn, 'connect');
+            },
+            ondata: function (conn, data) {
+                print(conn, data);
+            },
+            onevent: function (conn, data, ev, edata) {
+                print('event');
+            },
+            onclose: function (conn) {
+                print(conn, 'close');
+            },
+            onerror: function (conn) {
+                print('error');
+            }
         });
         Net.send(c, "eee");
         print(c, 'sent');
