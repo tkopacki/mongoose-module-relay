@@ -33,6 +33,8 @@ function startServer() {
             addr: 'udp://192.168.0.255:11345',
             onconnect: function (conn) {
                 print(conn, 'connect');
+                Net.send(c, "eee");
+                print(c, 'sent');
             },
             ondata: function (conn, data) {
                 print(conn, data);
@@ -47,8 +49,6 @@ function startServer() {
                 print('error');
             }
         });
-        Net.send(c, "eee");
-        print(c, 'sent');
         Net.close(c);
     }, null);
 }
