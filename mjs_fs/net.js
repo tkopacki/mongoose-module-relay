@@ -22,7 +22,7 @@ function startServer() {
             RPC.call(RPC.LOCAL, 'Sys.GetInfo', null, function (resp, ud) {
                 print('info:', JSON.stringify(resp));
                 let ip = resp.wifi.sta_ip;
-                let broadcast = 'udp://' + ip[0.10] + '255' + '11345'
+                let broadcast = 'udp://' + ip[0.10] + '255' + ':11345'
                 print(ip);
                 print(broadcast);
                 Net.serve({
